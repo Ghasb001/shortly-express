@@ -101,7 +101,7 @@ app.post('/login', function (req, res, next) {
   // if not, redicrect to login
   var inputUsername = req.body.username;
   var inputPassword = req.body.password;
-  return models.Users.get({username: req.body.username})
+  return models.Users.get({username: inputUsername})
     .then(data => {
       if (data === undefined) {
         res.redirect('/login');
