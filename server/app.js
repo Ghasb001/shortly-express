@@ -6,6 +6,7 @@ const Auth = require('./middleware/auth');
 const models = require('./models');
 
 const app = express();
+const router = express.Router();
 
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
@@ -16,17 +17,17 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 
 
-app.get('/', 
+app.get('/',
 (req, res) => {
   res.render('index');
 });
 
-app.get('/create', 
+app.get('/create',
 (req, res) => {
   res.render('index');
 });
 
-app.get('/links', 
+app.get('/links',
 (req, res, next) => {
   models.Links.getAll()
     .then(links => {
@@ -37,7 +38,7 @@ app.get('/links',
     });
 });
 
-app.post('/links', 
+app.post('/links',
 (req, res, next) => {
   var url = req.body.url;
   if (!models.Links.isValidUrl(url)) {
@@ -76,6 +77,44 @@ app.post('/links',
 /************************************************************/
 // Write your authentication routes here
 /************************************************************/
+
+
+app.post('/signup', function (req, res, next) {
+  var username = req.body.username;
+  var password = req.body.password;
+  return models.Users.get({username: req.body.username})
+    .then(data => {
+      if (data === undefined) {
+        models.Users.create({ username, password });
+        res.redirect('/');
+      } else {
+        res.redirect('/signup');
+      }
+    })
+    .then(() => {
+      res.end();
+    });
+});
+
+app.post('/login', function (req, res, next) {
+  // if the user exists, then we can log in. We will need to compare the user data
+  // if not, redicrect to login
+  var inputUsername = req.body.username;
+  var inputPassword = req.body.password;
+  return models.Users.get({username: req.body.username})
+    .then(data => {
+      if (data === undefined) {
+        res.redirect('/login');
+      } else if (models.Users.compare(inputPassword, data.password, data.salt)) {
+        res.redirect('/');
+      } else if (!models.Users.compare(inputPassword, data.password, data.salt)) {
+        res.redirect('/login');
+      }
+    })
+    .then(() => {
+      res.end();
+    });
+});
 
 
 

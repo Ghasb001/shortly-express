@@ -39,8 +39,8 @@ describe('', function() {
     /* TODO: Update user and password if different than on your local machine            */
     /*************************************************************************************/
     db = mysql.createConnection({
-      user: 'student',
-      password: 'student',
+      user: 'root',
+      password: '',
       database: 'shortly'
     });
 
@@ -62,6 +62,7 @@ describe('', function() {
   });
 
   describe('Database Schema:', function() {
+    //test 1
     it('contains a users table', function(done) {
       var queryString = 'SELECT * FROM users';
       db.query(queryString, function(err, results) {
@@ -72,6 +73,7 @@ describe('', function() {
       });
     });
 
+    //test 2
     it('contains id, username, password columns', function(done) {
       var newUser = {
         username: 'Howard',
@@ -88,6 +90,7 @@ describe('', function() {
       });
     });
 
+    //test 3
     it('only allows unique usernames', function(done) {
       var newUser = {
         username: 'Howard',
@@ -103,6 +106,7 @@ describe('', function() {
       });
     });
 
+    //test 4
     it('should increment the id of new rows', function(done) {
       var newUser = {
         username: 'Howard',
@@ -123,8 +127,9 @@ describe('', function() {
     });
   });
 
-  xdescribe('Account Creation:', function() {
+  describe('Account Creation:', function() {
 
+    //test 5
     it('signup creates a new user record', function(done) {
       var options = {
         'method': 'POST',
@@ -147,6 +152,7 @@ describe('', function() {
       });
     });
 
+    //test 6
     it('does not store the user\'s original text password', function(done) {
       var options = {
         'method': 'POST',
@@ -170,6 +176,7 @@ describe('', function() {
       });
     });
 
+    //test 7
     it('redirects to signup if the user already exists', function(done) {
       var options = {
         'method': 'POST',
@@ -190,6 +197,7 @@ describe('', function() {
       });
     });
 
+    //test 8
     it('redirects to index after user is created', function(done) {
       var options = {
         'method': 'POST',
@@ -208,7 +216,7 @@ describe('', function() {
     });
   });
 
-  xdescribe('Account Login:', function() {
+  describe('Account Login:', function() {
 
     beforeEach(function(done) {
       var options = {
@@ -225,6 +233,7 @@ describe('', function() {
       });
     });
 
+    //test 9
     it('Logs in existing users', function(done) {
       var options = {
         'method': 'POST',
@@ -242,6 +251,7 @@ describe('', function() {
       });
     });
 
+    //test 10
     it('Users that do not exist are kept on login page', function(done) {
       var options = {
         'method': 'POST',
