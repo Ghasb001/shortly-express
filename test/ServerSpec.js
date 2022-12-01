@@ -288,7 +288,8 @@ describe('', function() {
     });
   });
 
-  xdescribe('Sessions Schema:', function() {
+  describe('Sessions Schema:', function() {
+    //test 12
     it('contains a sessions table', function(done) {
       var queryString = 'SELECT * FROM sessions';
       db.query(queryString, function(err, results) {
@@ -298,6 +299,7 @@ describe('', function() {
       });
     });
 
+    //test 13
     it('contains id, hash, userId columns', function(done) {
       var newSession = {
         hash: 'e98f26e5c90a09e391eee2211b57a61b5dc836d5'
@@ -315,6 +317,7 @@ describe('', function() {
       });
     });
 
+    //test 14
     it('should increment the id of new rows', function(done) {
       var newSession = {
         hash: 'e98f26e5c90a09e391eee2211b57a61b5dc836d5'
@@ -336,12 +339,13 @@ describe('', function() {
     });
   });
 
-  xdescribe('Express Middleware', function() {
+  describe('Express Middleware', function() {
     var cookieParser = require('../server/middleware/cookieParser.js');
     var createSession = require('../server/middleware/auth.js').createSession;
 
     describe('Cookie Parser', function() {
 
+      //test 15
       it('parses cookies and assigns an object of key-value pairs to a session property on the request', function(done) {
         var requestWithoutCookies = httpMocks.createRequest();
         var requestWithCookies = httpMocks.createRequest({
@@ -383,6 +387,7 @@ describe('', function() {
     });
 
     describe('Session Parser', function() {
+      //test 16
       it('initializes a new session when there are no cookies on the request', function(done) {
         var requestWithoutCookies = httpMocks.createRequest();
         var response = httpMocks.createResponse();
