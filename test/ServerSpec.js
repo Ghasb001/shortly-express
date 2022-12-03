@@ -401,6 +401,7 @@ describe('', function() {
         });
       });
 
+      //test 17
       it('sets a new cookie on the response when a session is initialized', function(done) {
         var requestWithoutCookie = httpMocks.createRequest();
         var response = httpMocks.createResponse();
@@ -413,6 +414,7 @@ describe('', function() {
         });
       });
 
+      //test 18
       it('assigns a session object to the request if a session already exists', function(done) {
 
         var requestWithoutCookie = httpMocks.createRequest();
@@ -434,6 +436,7 @@ describe('', function() {
         });
       });
 
+      //test 19
       it('creates a new hash for each new session', function(done) {
         var requestWithoutCookies = httpMocks.createRequest();
         var response = httpMocks.createResponse();
@@ -451,6 +454,7 @@ describe('', function() {
         });
       });
 
+      //test 20
       it('assigns a username and userId property to the session object if the session is assigned to a user', function(done) {
         var requestWithoutCookie = httpMocks.createRequest();
         var response = httpMocks.createResponse();
@@ -480,6 +484,7 @@ describe('', function() {
         });
       });
 
+      //test 21
       it('clears and reassigns a new cookie if there is no session assigned to the cookie', function(done) {
         var maliciousCookieHash = '8a864482005bcc8b968f2b18f8f7ea490e577b20';
         var response = httpMocks.createResponse();
@@ -496,7 +501,7 @@ describe('', function() {
     });
   });
 
-  xdescribe('Sessions and cookies', function() {
+  describe('Sessions and cookies', function() {
     var requestWithSession;
     var cookieJar;
 
@@ -520,6 +525,7 @@ describe('', function() {
       done();
     });
 
+    //test 22
     it('saves a new session when the server receives a request', function(done) {
       requestWithSession('http://127.0.0.1:4568/', function(err, res, body) {
         if (err) { return done(err); }
